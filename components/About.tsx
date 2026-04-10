@@ -4,9 +4,17 @@ import { motion } from 'framer-motion'
 import { Code2, Palette, Zap, Users, Mail, Phone, MapPin, Calendar, Award, Link, Briefcase, Building, Clock } from 'lucide-react'
 import Image from 'next/image'
 
-interface AboutProps {}
+type AboutProps = {}
 
-const About: React.FC<AboutProps> = () => {
+type Experience = {
+  position: string
+  company: string
+  period: string
+  location: string
+  responsibilities: string[]
+}
+
+const About = ({}: AboutProps) => {
   const highlights = [
     {
       icon: <Code2 className="w-6 h-6 text-blue-300" />,
@@ -30,7 +38,69 @@ const About: React.FC<AboutProps> = () => {
     }
   ]
 
-  const experiences = []
+  const experiences: Experience[] = [
+    {
+      position: 'Responsable Pôle Web & Média',
+      company: 'Sitan Informatique',
+      period: "Janv. 2024 – Aujourd'hui",
+      location: 'Bamako',
+      responsibilities: [
+        'Pilotage de projets SI complexes (OISE, GTP) pour plusieurs institutions partenaires, de la spécification à la livraison.',
+        'Encadrement de 2 développeurs : répartition des tâches, revues de code, respect des délais.',
+        'Rédaction des spécifications fonctionnelles et techniques, participation aux comités de projet.',
+        'Développement full stack : Angular, NestJS, PostgreSQL, Flutter — livraison dans les délais sur 100% des modules.',
+        'Garantie de la qualité technique : tests fonctionnels, validation des livrables, performance.'
+      ]
+    },
+    {
+      position: 'Consultant Développeur Full Stack',
+      company: 'MCEBS Consulting',
+      period: "Août 2025 – Aujourd'hui",
+      location: 'Bamako',
+      responsibilities: [
+        "Conception et développement d'applications web et mobiles modernes (Angular, Flutter, NestJS).",
+        'Analyse des besoins métiers et traduction en solutions techniques documentées.',
+        "Intégration d'API REST, bases de données PostgreSQL/Firebase et services tiers.",
+        "Rédaction d'offres techniques dans le cadre de réponses à appels d'offres."
+      ]
+    },
+    {
+      position: 'Consultant – Développeur & Community Manager',
+      company: "ROM'S MEDIA",
+      period: "Janv. 2026 – Aujourd'hui",
+      location: 'Bamako',
+      responsibilities: [
+        "Développement et maintenance de solutions web pour l'agence et ses clients (Angular, Firebase, WordPress, NextJS).",
+        'Définition et pilotage de la stratégie digitale : planification éditoriale, campagnes, analyse des performances.',
+        'Conception et livraison de 2 sites web institutionnels (IIMB, RD Service) en moins de 30 jours chacun.'
+      ]
+    },
+    {
+      position: 'Formateur en Développement Web & Mobile',
+      company: 'SIMPLE 1 / AMI',
+      period: "Août 2022 – Aujourd'hui",
+      location: 'Kati & Bamako',
+      responsibilities: [
+        'Formation de plus de 80 apprenants (débutants à intermédiaires) en développement web, mobile, BDD et outils IA.',
+        'Conception de programmes pédagogiques complets : NestJS, PostgreSQL, WordPress, Canva, Outils IA.',
+        'Évaluation des compétences, suivi de progression et validation des acquis à chaque promotion.',
+        'Utilisation de projets réels comme cas pratiques pour ancrer les apprentissages.'
+      ]
+    },
+    {
+      position: 'Stagiaire Développeur Full Stack',
+      company: 'Sitan Informatique',
+      period: 'Févr. 2023 – Déc. 2023',
+      location: 'Bamako',
+      responsibilities: [
+        'Développement d’applications Web et Mobile (Angular, NestJS, Firebase).',
+        'Participation aux phases de conception, développement et tests fonctionnels sur des projets internes.'
+      ]
+    }
+  ]
+
+  const buttonBase =
+    'relative inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm text-white transition-all duration-300 overflow-hidden group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900'
 
   return (
     <motion.section
@@ -146,33 +216,55 @@ const About: React.FC<AboutProps> = () => {
 
                 <div className="mt-6 pt-6 border-t border-white/10">
                   <div className="flex flex-col gap-3 mb-4 sm:flex-row sm:items-center">
-                    <a
+                    <motion.a
                       href="https://linkedin.com/in/toumany-diarra"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-slate-800/90 border border-slate-700 px-4 py-2 text-sm text-white hover:bg-slate-700 transition-colors"
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                      className={`${buttonBase} bg-slate-800/90 border-slate-700 hover:border-blue-400/40 hover:text-white hover:shadow-[0_12px_30px_-16px_rgba(59,130,246,0.8)]`}
                     >
-                      <Link className="w-4 h-4" />
-                      LinkedIn
-                    </a>
-                    <a
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-blue-500/0 via-white/10 to-blue-500/0 translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700" />
+                      <span className="pointer-events-none absolute -inset-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-500/25 via-purple-500/15 to-blue-500/25" />
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        <Link className="w-4 h-4" />
+                        LinkedIn
+                      </span>
+                    </motion.a>
+                    <motion.a
                       href="https://github.com/toumany"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-slate-800/90 border border-slate-700 px-4 py-2 text-sm text-white hover:bg-slate-700 transition-colors"
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                      className={`${buttonBase} bg-slate-800/90 border-slate-700 hover:border-purple-400/40 hover:text-white hover:shadow-[0_12px_30px_-16px_rgba(168,85,247,0.7)]`}
                     >
-                      <Code2 className="w-4 h-4" />
-                      GitHub
-                    </a>
-                    <a
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/10 to-purple-500/0 translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700" />
+                      <span className="pointer-events-none absolute -inset-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-purple-500/20 via-blue-500/10 to-purple-500/20" />
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        <Code2 className="w-4 h-4" />
+                        GitHub
+                      </span>
+                    </motion.a>
+                    <motion.a
                       href="https://github.com/toumany?tab=repositories"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-blue-500/10 border border-blue-400/20 px-4 py-2 text-sm text-blue-200 hover:bg-blue-500/10 hover:text-white transition-colors"
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                      className={`${buttonBase} bg-blue-500/10 border-blue-400/30 text-blue-200 hover:text-white hover:border-blue-300/70 hover:shadow-[0_14px_36px_-18px_rgba(59,130,246,0.9)]`}
                     >
-                      <Code2 className="w-4 h-4" />
-                      Voir repos
-                    </a>
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-blue-500/0 via-white/15 to-blue-500/0 translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700" />
+                      <span className="pointer-events-none absolute -inset-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-500/35 via-cyan-400/15 to-blue-500/35" />
+                      <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.25),transparent_60%)]" />
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        <Code2 className="w-4 h-4" />
+                        Voir repos
+                      </span>
+                    </motion.a>
                   </div>
                   <p className="text-slate-400 text-sm leading-relaxed">
                     Avec plus de 6 ans d'expérience en développement full-stack, je transforme vos idées en solutions digitales performantes et élégantes.
@@ -184,7 +276,7 @@ const About: React.FC<AboutProps> = () => {
           </div>
         </motion.div>
 
-        <div className="grid gap-12 lg:grid-cols-1">
+        <div className="mt-16 space-y-12">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -207,9 +299,6 @@ const About: React.FC<AboutProps> = () => {
             </div>
           </motion.div>
 
-        </div>
-
-        <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -221,46 +310,54 @@ const About: React.FC<AboutProps> = () => {
               <p className="text-sm uppercase tracking-[0.35em] text-blue-300">Expérience Professionnelle</p>
               <h3 className="mt-4 text-3xl font-bold text-white">Mon parcours professionnel</h3>
             </div>
-            <div className="space-y-6">
+            <div className="relative space-y-6 pl-8">
+              <div className="absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-blue-500/50 via-purple-500/30 to-transparent"></div>
               {experiences.map((exp, index) => (
                 <motion.div
-                  key={index}
+                  key={`${exp.company}-${exp.position}-${index}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="rounded-2xl border border-white/10 bg-slate-950/80 p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.9)]"
+                  transition={{ delay: index * 0.08, duration: 0.6 }}
+                  className="relative"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/20">
-                      <Briefcase className="w-6 h-6" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between gap-4 mb-2">
-                        <div>
-                          <h4 className="text-lg font-semibold text-white">{exp.position}</h4>
-                          <div className="flex items-center gap-2 text-blue-300 text-sm">
+                  <span className="absolute -left-3 top-6 inline-flex h-7 w-7 items-center justify-center rounded-full border border-blue-400/40 bg-slate-950 text-xs font-semibold text-blue-200 shadow-[0_0_0_6px_rgba(15,23,42,0.6)]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <div className="relative rounded-2xl border border-white/10 bg-slate-950/80 p-6 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.9)]">
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-blue-500/40 via-purple-500/20 to-transparent"></div>
+                    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                      <div>
+                        <div className="flex items-center gap-3 text-white">
+                          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/20">
+                            <Briefcase className="w-5 h-5" />
+                          </span>
+                          <h4 className="text-lg font-semibold">{exp.position}</h4>
+                        </div>
+                        <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-blue-200">
+                          <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/10 px-3 py-1">
                             <Building className="w-4 h-4" />
                             <span>{exp.company}</span>
-                          </div>
-                        </div>
-                        <div className="text-right text-slate-400 text-sm">
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{exp.period}</span>
-                          </div>
-                          <div className="text-xs">{exp.location}</div>
+                          </span>
+                          <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/20 bg-purple-500/10 px-3 py-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{exp.location}</span>
+                          </span>
                         </div>
                       </div>
-                      <ul className="space-y-2 text-slate-300 text-sm">
-                        {exp.responsibilities.map((resp, respIndex) => (
-                          <li key={respIndex} className="flex items-start gap-2">
-                            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-500 flex-shrink-0"></span>
-                            <span>{resp}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="inline-flex items-center gap-2 self-start rounded-full border border-white/10 bg-slate-900/70 px-3 py-1 text-sm text-slate-300">
+                        <Clock className="w-4 h-4 text-blue-300" />
+                        <span>{exp.period}</span>
+                      </div>
                     </div>
+                    <ul className="mt-5 space-y-2 text-slate-300 text-sm">
+                      {exp.responsibilities.map((resp, respIndex) => (
+                        <li key={respIndex} className="flex items-start gap-2">
+                          <span className="mt-1 h-2 w-2 rounded-full bg-blue-400 flex-shrink-0"></span>
+                          <span>{resp}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </motion.div>
               ))}
@@ -297,15 +394,14 @@ const About: React.FC<AboutProps> = () => {
               ))}
             </div>
           </motion.div>
-        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
-        >
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
+          >
             <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-blue-500/10 via-transparent to-purple-500/10 blur-2xl"></div>
             <div className="relative z-10 space-y-8">
               <div className="space-y-4 rounded-3xl border border-white/10 bg-slate-950/80 p-6 shadow-sm shadow-slate-950/20">

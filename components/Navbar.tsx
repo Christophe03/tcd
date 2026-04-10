@@ -30,12 +30,12 @@ const Navbar: React.FC<NavbarProps> = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           href="#home"
-          className="inline-flex items-center gap-3 text-lg font-bold text-white"
+          className="group inline-flex items-center gap-3 text-lg font-semibold text-white"
         >
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 text-sm shadow-lg shadow-blue-500/20">
-            T
+          <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 shadow-[0_0_12px_rgba(99,102,241,0.5)] transition-transform duration-300 group-hover:scale-110" />
+          <span className="text-sm uppercase tracking-[0.35em] text-transparent bg-clip-text bg-gradient-to-r from-slate-100 via-blue-200 to-purple-200 transition-all duration-300 group-hover:tracking-[0.4em]">
+            Portfolio
           </span>
-          <span className="hidden sm:inline">Toumany Diarra</span>
         </motion.a>
 
         <div className="hidden md:flex items-center gap-8">

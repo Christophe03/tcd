@@ -1,11 +1,56 @@
 'use client'
 
+import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, MessageCircle, Link, Code } from 'lucide-react'
 
-interface ContactProps {}
+type ContactProps = {}
 
-const Contact: React.FC<ContactProps> = () => {
+const Contact = ({}: ContactProps) => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [statusMessage, setStatusMessage] = useState('')
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (status === 'loading') return
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const payload = {
+      name: String(formData.get('name') || '').trim(),
+      email: String(formData.get('email') || '').trim(),
+      subject: String(formData.get('subject') || '').trim(),
+      message: String(formData.get('message') || '').trim(),
+      company: String(formData.get('company') || '').trim()
+    }
+
+    setStatus('loading')
+    setStatusMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Une erreur s'est produite. Réessaie dans un instant.")
+      }
+
+      setStatus('success')
+      setStatusMessage('Message envoyé avec succès. Je te réponds rapidement.')
+      form.reset()
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Impossible d'envoyer le message. Réessaie plus tard."
+      setStatus('error')
+      setStatusMessage(message)
+    }
+  }
+
   return (
     <motion.section
       id="contact"
@@ -53,7 +98,7 @@ const Contact: React.FC<ContactProps> = () => {
                 <Mail className="h-6 w-6 text-blue-300" />
                 <div>
                   <p className="font-semibold text-white">Email</p>
-                  <p>contact@example.com</p>
+                  <p>toumanychristophediarra@gmail.com</p>
                 </div>
               </motion.div>
               <motion.div
@@ -95,37 +140,65 @@ const Contact: React.FC<ContactProps> = () => {
             viewport={{ once: true }}
             className="rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid gap-6 sm:grid-cols-2">
                 <input
                   type="text"
+                  name="name"
                   placeholder="Nom"
+                  required
                   className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-none"
                 />
                 <input
                   type="email"
+                  name="email"
                   placeholder="Email"
+                  required
                   className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-none"
                 />
               </div>
               <input
                 type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+              <input
+                type="text"
+                name="subject"
                 placeholder="Sujet"
+                required
                 className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-none"
               />
               <textarea
                 placeholder="Votre message..."
                 rows={5}
+                name="message"
+                required
                 className="w-full rounded-3xl border border-white/10 bg-slate-950/90 px-5 py-4 text-white placeholder:text-slate-500 focus:border-blue-400 focus:outline-none"
               />
+              {statusMessage ? (
+                <div
+                  className={`rounded-2xl border px-4 py-3 text-sm ${
+                    status === 'success'
+                      ? 'border-emerald-400/30 bg-emerald-500/10 text-emerald-200'
+                      : 'border-rose-400/30 bg-rose-500/10 text-rose-200'
+                  }`}
+                >
+                  {statusMessage}
+                </div>
+              ) : null}
               <motion.button
                 type="submit"
                 whileHover={{ y: -1, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 210, damping: 18 }}
-                className="inline-flex w-full items-center justify-center rounded-full bg-slate-800/95 border border-slate-700 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-700"
+                disabled={status === 'loading'}
+                className="inline-flex w-full items-center justify-center rounded-full bg-slate-800/95 border border-slate-700 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Envoyer le message
+                {status === 'loading' ? 'Envoi en cours...' : 'Envoyer le message'}
               </motion.button>
             </form>
           </motion.div>

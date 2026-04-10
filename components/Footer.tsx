@@ -44,7 +44,7 @@ const Footer: React.FC<FooterProps> = () => {
             className="space-y-3 rounded-[28px] border border-white/10 bg-slate-900/85 p-6 shadow-[0_30px_90px_-50px_rgba(15,23,42,0.9)]"
           >
             <p className="text-sm uppercase tracking-[0.35em] text-blue-300">Contact rapide</p>
-            <div className="text-white text-lg font-medium">contact@toumany.dev</div>
+            <div className="text-white text-lg font-medium">toumanychristophediarra@gmail.com</div>
             <div className="text-slate-400">Disponible pour des missions freelance et des collaborations.</div>
           </motion.div>
         </div>
