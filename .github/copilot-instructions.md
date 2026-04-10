@@ -1,0 +1,3 @@
+- Use this file to provide workspace-specific custom instructions to Copilot.
+- Ensure the project scaffolding and build are complete before making further changes.
+- Project uses Next.js App Router, Tailwind CSS, and static export via `next.config.js`.

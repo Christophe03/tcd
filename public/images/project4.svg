@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#gradient4)" />
+  <rect x="200" y="180" width="760" height="440" rx="48" ry="48" fill="#ffffff22" />
+  <rect x="280" y="240" width="540" height="40" rx="20" fill="#fff" opacity="0.9" />
+  <rect x="280" y="320" width="620" height="24" rx="12" fill="#fff" opacity="0.75" />
+  <rect x="280" y="370" width="520" height="24" rx="12" fill="#fff" opacity="0.75" />
+  <rect x="280" y="430" width="420" height="24" rx="12" fill="#fff" opacity="0.75" />
+</svg>
