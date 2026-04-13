@@ -60,27 +60,27 @@ export const projects = [
 export const services = [
     {
         title: 'Développement Web',
-        description: 'Création de sites web responsives et modernes utilisant les dernières technologies et meilleures pratiques.'
+        description: 'Création de sites web responsives et modernes, optimisés pour le SEO et la conversion.'
     },
     {
         title: 'Développement Mobile',
-        description: 'Développement d\'applications mobiles cross-platform pour iOS et Android.'
+        description: 'Développement d\'applications mobiles cross-platform pour iOS et Android, avec un focus UX/UI et performance.'
+    },
+    {
+        title: 'Intelligence Artificielle',
+        description: 'Conception et intégration de solutions IA pour automatiser des processus et enrichir l’expérience utilisateur.'
     },
     {
         title: 'Marketing Digital',
         description: 'Stratégie et mise en œuvre de campagnes de marketing digital efficaces et gestion des réseaux sociaux.'
     },
     {
-        title: 'Création de Contenu',
-        description: 'Production de contenu engageant pour les sites web, réseaux sociaux et supports marketing.'
-    },
-    {
         title: 'Formation',
-        description: 'Ateliers pratiques en développement web/mobile et outils numériques pour vos équipes.'
+        description: 'Ateliers pratiques en développement web, mobile et intelligence artificielle pour vos équipes et apprenants.'
     },
     {
         title: 'Automatisation',
-        description: 'Automatisation de vos processus (workflows, intégrations, scripts) pour gagner du temps.'
+        description: 'Automatisation de vos processus (workflows, intégrations, scripts) pour gagner du temps et fiabiliser les opérations.'
     },
 ]
 

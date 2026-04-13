@@ -8,6 +8,7 @@ import { services } from '@/data'
 const serviceIcons: Record<string, ReactNode> = {
   'Développement Web': <Monitor className="w-6 h-6 text-blue-300" />,
   'Développement Mobile': <Smartphone className="w-6 h-6 text-purple-300" />,
+  'Intelligence Artificielle': <Zap className="w-6 h-6 text-cyan-300" />,
   'Marketing Digital': <TrendingUp className="w-6 h-6 text-cyan-300" />,
   'Création de Contenu': <PenTool className="w-6 h-6 text-blue-300" />,
   'Formation': <GraduationCap className="w-6 h-6 text-emerald-300" />,
@@ -58,7 +59,7 @@ const Services: React.FC<ServicesProps> = () => {
             Une méthode simple et performante
           </h2>
           <p className="mt-4 text-slate-300 max-w-3xl mx-auto leading-relaxed text-lg">
-            Du brief initial à la mise en ligne, j’accompagne chaque étape pour livrer une solution digitale professionnelle.
+            Du brief initial à la mise en ligne, je conçois des sites web, applications mobiles, formations et solutions IA. Chaque projet est traité comme une mission de consultant digital orientée résultats.
           </p>
         </motion.div>
 

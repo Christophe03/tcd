@@ -95,8 +95,7 @@ const Hero: React.FC<HeroProps> = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-6 text-lg leading-8 text-slate-300 md:text-xl"
           >
-            Développeur Full-Stack passionné, j’accompagne les entreprises et les porteurs de projet
-            avec des sites web et applications mobiles fiables, rapides et esthétiques.
+            Consultant et développeur web et mobile, je crée des sites web, applications mobiles et solutions d'intelligence artificielle. Je propose aussi des formations professionnelles pour transmettre mes expertises.
           </motion.p>
 
           <motion.div

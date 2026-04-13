@@ -76,7 +76,7 @@ const Skills: React.FC<SkillsProps> = () => {
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Compétences</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">Ce que je maîtrise</h2>
           <p className="mt-4 text-slate-300 max-w-3xl mx-auto leading-relaxed text-lg">
-            Une sélection de technologies et d’outils que j’utilise pour créer des expériences digitales efficaces et durables.
+            Une sélection de technologies et d’outils que j’utilise pour créer des sites web, applications mobiles et solutions IA efficaces et durables.
           </p>
         </motion.div>
 
