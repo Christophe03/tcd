@@ -74,12 +74,12 @@ const Contact = ({}: ContactProps) => {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
+            className="min-w-0 rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
             <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Restons en contact</p>
             <h3 className="text-3xl font-semibold text-white mb-6">Je suis là pour vos projets web et mobile.</h3>
@@ -95,12 +95,12 @@ const Contact = ({}: ContactProps) => {
                 <Mail className="h-6 w-6 text-blue-300" />
                 <div>
                   <p className="font-semibold text-white">Email</p>
-                  <p>toumanychristophediarra@gmail.com</p>
+                  <p className="break-all">toumanychristophediarra@gmail.com</p>
                 </div>
               </motion.div>
               <a
                 href={`mailto:${contactEmail}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-200 transition hover:border-blue-300/60 hover:text-white"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.2em] text-blue-200 transition hover:border-blue-300/60 hover:text-white sm:w-auto"
               >
                 Envoyer un email
               </a>
@@ -122,7 +122,7 @@ const Contact = ({}: ContactProps) => {
                 href="https://wa.me/22396855282"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200 transition hover:border-emerald-300/60 hover:text-white"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200 transition hover:border-emerald-300/60 hover:text-white sm:w-auto"
               >
                 Ouvrir WhatsApp
               </a>
@@ -149,7 +149,7 @@ const Contact = ({}: ContactProps) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
+            className="min-w-0 rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid gap-6 sm:grid-cols-2">
