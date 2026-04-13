@@ -4,9 +4,17 @@ import { motion } from 'framer-motion'
 import { Code2, Palette, Zap, Users, Mail, Phone, MapPin, Calendar, Award, Link, Briefcase, Building, Clock } from 'lucide-react'
 import Image from 'next/image'
 
-interface AboutProps {}
+type AboutProps = {}
 
-const About: React.FC<AboutProps> = () => {
+type Experience = {
+  position: string
+  company: string
+  period: string
+  location: string
+  responsibilities: string[]
+}
+
+const About = ({}: AboutProps) => {
   const highlights = [
     {
       icon: <Code2 className="w-6 h-6 text-blue-300" />,
@@ -30,7 +38,7 @@ const About: React.FC<AboutProps> = () => {
     }
   ]
 
-  const experiences = []
+  const experiences: Experience[] = []
 
   return (
     <motion.section
@@ -349,7 +357,6 @@ const About: React.FC<AboutProps> = () => {
               className="absolute -bottom-6 left-6 h-16 w-16 rounded-full bg-purple-500/20 blur-2xl"
             />
           </motion.div>
-        </div>
       </div>
     </motion.section>
   )

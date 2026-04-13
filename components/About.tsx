@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import { motion } from 'framer-motion'
-import { Code2, Palette, Zap, Users, Mail, Phone, MapPin, Calendar, Award, Link, Briefcase, Building, Clock } from 'lucide-react'
+import { Code2, Palette, Zap, Users, Mail, Phone, MapPin, Calendar, Award, Link, Briefcase, Building, Clock, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 
 type AboutProps = {}
@@ -105,21 +105,21 @@ const About = ({}: AboutProps) => {
   return (
     <motion.section
       id="about"
-      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.85, ease: 'easeOut' }}
-      className="py-24 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-30" aria-hidden="true" />
       <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl"></div>
       <div className="absolute right-0 bottom-24 h-72 w-72 rounded-full bg-purple-500/15 blur-3xl"></div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">À Propos</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Mon parcours et mes forces</h2>
@@ -130,7 +130,6 @@ const About = ({}: AboutProps) => {
 
         {/* Fiche Google / Carte de visite digitale */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
@@ -139,7 +138,6 @@ const About = ({}: AboutProps) => {
           <div className="grid gap-8 lg:grid-cols-[1fr_2fr] items-start">
             {/* Photo principale */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="flex justify-center"
@@ -167,7 +165,6 @@ const About = ({}: AboutProps) => {
 
             {/* Informations */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="space-y-6"
@@ -216,6 +213,22 @@ const About = ({}: AboutProps) => {
 
                 <div className="mt-6 pt-6 border-t border-white/10">
                   <div className="flex flex-col gap-3 mb-4 sm:flex-row sm:items-center">
+                    <motion.a
+                      href="https://wa.me/22396855282"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -2, scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                      className={`${buttonBase} bg-emerald-500/10 border-emerald-400/30 text-emerald-200 hover:text-white hover:border-emerald-300/70 hover:shadow-[0_12px_30px_-16px_rgba(16,185,129,0.6)]`}
+                    >
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-white/10 to-emerald-500/0 translate-x-[-140%] group-hover:translate-x-[140%] transition-transform duration-700" />
+                      <span className="pointer-events-none absolute -inset-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-emerald-500/20 via-emerald-400/10 to-emerald-500/20" />
+                      <span className="relative z-10 inline-flex items-center gap-2">
+                        <MessageCircle className="w-4 h-4" />
+                        WhatsApp
+                      </span>
+                    </motion.a>
                     <motion.a
                       href="https://linkedin.com/in/toumany-diarra"
                       target="_blank"
@@ -278,7 +291,6 @@ const About = ({}: AboutProps) => {
 
         <div className="mt-16 space-y-12">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
@@ -300,7 +312,6 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -315,7 +326,6 @@ const About = ({}: AboutProps) => {
               {experiences.map((exp, index) => (
                 <motion.div
                   key={`${exp.company}-${exp.position}-${index}`}
-                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.08, duration: 0.6 }}
@@ -365,7 +375,6 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -379,7 +388,6 @@ const About = ({}: AboutProps) => {
               {highlights.map((highlight, index) => (
                 <motion.div
                   key={highlight.title}
-                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
@@ -396,7 +404,6 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}

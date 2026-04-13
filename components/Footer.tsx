@@ -13,6 +13,8 @@ const Footer: React.FC<FooterProps> = () => {
       transition={{ duration: 0.8, ease: 'easeOut' }}
       className="relative overflow-hidden bg-slate-950 text-slate-200 py-12"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-25" aria-hidden="true" />
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-blue-500/10 via-transparent to-transparent" />
       <div className="absolute right-10 top-10 h-24 w-24 rounded-full bg-purple-500/10 blur-3xl" />
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,15 +57,7 @@ const Footer: React.FC<FooterProps> = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            © 2024 Toumany dit Christophe Diarra. Tous droits réservés.
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            Construit avec Next.js, Tailwind CSS et Framer Motion.
+            © {new Date().getFullYear()} Toumany dit Christophe Diarra. Tous droits réservés.
           </motion.span>
         </div>
       </div>

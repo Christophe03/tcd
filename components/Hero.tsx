@@ -50,12 +50,22 @@ const Hero: React.FC<HeroProps> = () => {
       variants={sectionVariant}
       className="relative min-h-screen overflow-hidden bg-slate-950"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.2),transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.15),transparent_30%),linear-gradient(180deg,_rgba(15,23,42,0.95),rgba(15,23,42,0.95))]" />
-      <div className="absolute left-10 top-24 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl" />
-      <div className="absolute right-10 top-32 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
-      <div className="absolute left-1/2 bottom-24 h-48 w-48 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-hero-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-hero-grid opacity-40" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute left-8 top-20 h-60 w-60 rounded-full bg-blue-500/20 blur-3xl mix-blend-screen"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute right-8 top-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl mix-blend-screen"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute left-1/2 bottom-24 h-52 w-52 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-24 text-center lg:px-8 lg:text-left">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8 lg:text-left md:gap-12">
         <div className="mx-auto max-w-3xl lg:mx-0">
           <motion.div
             initial={{ opacity: 0, y: 28 }}

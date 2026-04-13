@@ -7,21 +7,21 @@ import {
   ArrowRight,
   LayoutGrid,
   Smartphone,
-  BarChart3,
   Monitor,
   Globe,
   ShieldCheck,
-  Package
+  Package,
+  Scissors
 } from 'lucide-react'
 import { projects } from '@/data'
 
 const projectIcons: Record<string, ReactNode> = {
-  'Plateforme E-Commerce': <Package className="w-5 h-5 text-blue-300" />,
-  'Application Bancaire Mobile': <Smartphone className="w-5 h-5 text-purple-300" />,
-  'Tableau de Bord Réseaux Sociaux': <BarChart3 className="w-5 h-5 text-cyan-300" />,
+  'Mes Factures': <Smartphone className="w-5 h-5 text-purple-300" />,
+  'Gestion de Stocks': <Package className="w-5 h-5 text-blue-300" />,
+  'Salon de Coiffure': <Scissors className="w-5 h-5 text-cyan-300" />,
   'Site Portfolio': <Monitor className="w-5 h-5 text-blue-300" />,
   "Premier Conseil d'Orientation": <Globe className="w-5 h-5 text-cyan-300" />,
-  'IIM Université Bamako': <LayoutGrid className="w-5 h-5 text-purple-300" />,
+  'IIM Universit?? Bamako': <LayoutGrid className="w-5 h-5 text-purple-300" />,
   'ROMS Media': <ShieldCheck className="w-5 h-5 text-blue-300" />
 }
 
@@ -35,8 +35,10 @@ const Projects: React.FC<ProjectsProps> = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.9, ease: 'easeOut' }}
-      className="relative py-24 bg-slate-950 text-white overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-30" aria-hidden="true" />
       <div className="absolute left-0 top-0 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
       <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +46,7 @@ const Projects: React.FC<ProjectsProps> = () => {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Projets</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">

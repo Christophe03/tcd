@@ -7,12 +7,12 @@ import { Mail, MessageCircle, Link, Code } from 'lucide-react'
 type ContactProps = {}
 
 const Contact = ({}: ContactProps) => {
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState('')
+  const contactEmail = 'toumanychristophediarra@gmail.com'
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (status === 'loading') return
 
     const form = event.currentTarget
     const formData = new FormData(form)
@@ -24,31 +24,26 @@ const Contact = ({}: ContactProps) => {
       company: String(formData.get('company') || '').trim()
     }
 
-    setStatus('loading')
-    setStatusMessage('')
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
-
-      const data = await response.json().catch(() => ({}))
-
-      if (!response.ok) {
-        throw new Error(data?.error || "Une erreur s'est produite. Réessaie dans un instant.")
-      }
-
-      setStatus('success')
-      setStatusMessage('Message envoyé avec succès. Je te réponds rapidement.')
-      form.reset()
-    } catch (error) {
-      const message =
-        error instanceof Error ? error.message : "Impossible d'envoyer le message. Réessaie plus tard."
+    if (!payload.name || !payload.email || !payload.subject || !payload.message) {
       setStatus('error')
-      setStatusMessage(message)
+      setStatusMessage('Merci de remplir tous les champs.')
+      return
     }
+
+    if (payload.company) {
+      setStatus('success')
+      setStatusMessage('Merci !')
+      return
+    }
+
+    const subject = encodeURIComponent(`[Portfolio] ${payload.subject}`)
+    const body = encodeURIComponent(
+      `Nom: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`
+    )
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`
+    setStatus('success')
+    setStatusMessage('Votre client mail va s’ouvrir pour envoyer le message.')
+    form.reset()
   }
 
   return (
@@ -58,8 +53,10 @@ const Contact = ({}: ContactProps) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.85, ease: 'easeOut' }}
-      className="relative py-24 bg-slate-950 text-white overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-30" aria-hidden="true" />
       <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl" />
       <div className="absolute right-0 bottom-24 h-72 w-72 rounded-full bg-purple-500/15 blur-3xl" />
 
@@ -68,7 +65,7 @@ const Contact = ({}: ContactProps) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="hidden md:block text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Contact</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">Discutons de votre projet</h2>
@@ -101,6 +98,12 @@ const Contact = ({}: ContactProps) => {
                   <p>toumanychristophediarra@gmail.com</p>
                 </div>
               </motion.div>
+              <a
+                href={`mailto:${contactEmail}`}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-200 transition hover:border-blue-300/60 hover:text-white"
+              >
+                Envoyer un email
+              </a>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -115,6 +118,14 @@ const Contact = ({}: ContactProps) => {
                   <p>+223 96 85 52 82</p>
                 </div>
               </motion.div>
+              <a
+                href="https://wa.me/22396855282"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-6 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-emerald-200 transition hover:border-emerald-300/60 hover:text-white"
+              >
+                Ouvrir WhatsApp
+              </a>
               <div className="grid gap-4 sm:grid-cols-2">
                 <a
                   href="https://www.linkedin.com/in/toumany-dit-christophe-diarra-386401188/"
@@ -195,10 +206,9 @@ const Contact = ({}: ContactProps) => {
                 whileHover={{ y: -1, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 210, damping: 18 }}
-                disabled={status === 'loading'}
-                className="inline-flex w-full items-center justify-center rounded-full bg-slate-800/95 border border-slate-700 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-70"
+                className="inline-flex w-full items-center justify-center rounded-full bg-slate-800/95 border border-slate-700 px-6 py-4 text-base font-semibold text-white transition hover:bg-slate-700"
               >
-                {status === 'loading' ? 'Envoi en cours...' : 'Envoyer le message'}
+                Envoyer le message
               </motion.button>
             </form>
           </motion.div>

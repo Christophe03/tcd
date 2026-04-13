@@ -1,3 +1,4 @@
 node_modules
 .env.local
 .env*.local
+functions/node_modules

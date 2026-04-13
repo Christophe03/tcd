@@ -1,25 +1,25 @@
 export const projects = [
     {
         id: 1,
-        title: 'Plateforme E-Commerce',
-        description: 'Solution e-commerce complète avec intégration de paiement et tableau de bord administrateur.',
-        technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+        title: 'Mes Factures',
+        description: 'Application mobile de gestion des factures, rapide et intuitive.',
+        technologies: ['Flutter', 'Firebase'],
         image: '/images/project1.svg',
         link: '#'
     },
     {
         id: 2,
-        title: 'Application Bancaire Mobile',
-        description: 'Application bancaire mobile sécurisée avec authentification biométrique.',
-        technologies: ['React Native', 'Firebase', 'Node.js'],
+        title: 'Gestion de Stocks',
+        description: 'Application web de gestion de stocks avec suivi des entr?es, sorties et alertes.',
+        technologies: ['Next.js', 'Node.js', 'PostgreSQL'],
         image: '/images/project2.svg',
         link: '#'
     },
     {
         id: 3,
-        title: 'Tableau de Bord Réseaux Sociaux',
-        description: 'Tableau de bord d\'analyse pour la gestion et la planification des publications sur les réseaux sociaux.',
-        technologies: ['Vue.js', 'Express', 'PostgreSQL'],
+        title: 'Salon de Coiffure',
+        description: 'Application mobile de gestion de salon : r?servations, clients et services.',
+        technologies: ['Flutter', 'Firebase'],
         image: '/images/project3.svg',
         link: '#'
     },
@@ -73,7 +73,15 @@ export const services = [
     {
         title: 'Création de Contenu',
         description: 'Production de contenu engageant pour les sites web, réseaux sociaux et supports marketing.'
-    }
+    },
+    {
+        title: 'Formation',
+        description: 'Ateliers pratiques en développement web/mobile et outils numériques pour vos équipes.'
+    },
+    {
+        title: 'Automatisation',
+        description: 'Automatisation de vos processus (workflows, intégrations, scripts) pour gagner du temps.'
+    },
 ]
 
 export const skills = [

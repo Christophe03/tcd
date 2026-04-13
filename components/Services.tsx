@@ -2,14 +2,16 @@
 
 import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Monitor, Smartphone, TrendingUp, PenTool } from 'lucide-react'
+import { ArrowRight, Monitor, Smartphone, TrendingUp, PenTool, GraduationCap, Zap } from 'lucide-react'
 import { services } from '@/data'
 
 const serviceIcons: Record<string, ReactNode> = {
   'Développement Web': <Monitor className="w-6 h-6 text-blue-300" />,
   'Développement Mobile': <Smartphone className="w-6 h-6 text-purple-300" />,
   'Marketing Digital': <TrendingUp className="w-6 h-6 text-cyan-300" />,
-  'Création de Contenu': <PenTool className="w-6 h-6 text-blue-300" />
+  'Création de Contenu': <PenTool className="w-6 h-6 text-blue-300" />,
+  'Formation': <GraduationCap className="w-6 h-6 text-emerald-300" />,
+  'Automatisation': <Zap className="w-6 h-6 text-amber-300" />
 }
 
 const processSteps = [
@@ -37,8 +39,10 @@ const Services: React.FC<ServicesProps> = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="relative py-24 bg-slate-950 text-white overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-30" aria-hidden="true" />
       <div className="absolute inset-x-0 top-20 h-72 bg-blue-500/10 blur-3xl" />
       <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-purple-500/15 blur-3xl" />
 
@@ -47,7 +51,7 @@ const Services: React.FC<ServicesProps> = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Comment je travaille</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">

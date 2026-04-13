@@ -59,8 +59,10 @@ const Skills: React.FC<SkillsProps> = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.85, ease: 'easeOut' }}
-      className="relative py-24 bg-slate-950 text-white overflow-hidden"
+      className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
+      <div className="pointer-events-none absolute inset-0 bg-section-aurora" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-section-grid opacity-30" aria-hidden="true" />
       <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl" />
       <div className="absolute right-0 bottom-24 h-72 w-72 rounded-full bg-purple-500/15 blur-3xl" />
 
@@ -69,7 +71,7 @@ const Skills: React.FC<SkillsProps> = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Compétences</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white">Ce que je maîtrise</h2>
