@@ -18,6 +18,7 @@ import {
   Activity
 } from 'lucide-react'
 import { skills } from '@/data'
+import { useIsSmallScreen } from '@/components/useIsSmallScreen'
 
 const categoryIcons: Record<string, ReactNode> = {
   Frontend: <LayoutGrid className="w-6 h-6" />,
@@ -51,13 +52,23 @@ const Skills: React.FC<SkillsProps> = () => {
   const frontendSkills = skills.filter((skill) => skill.category === 'Frontend')
   const backendSkills = skills.filter((skill) => skill.category === 'Backend')
   const toolsSkills = skills.filter((skill) => skill.category === 'Outils')
+  const isSmallScreen = useIsSmallScreen()
+  const reveal = (offset = 20, amount = 0.2) =>
+    isSmallScreen
+      ? {
+          initial: { opacity: 0, y: offset },
+          animate: { opacity: 1, y: 0 }
+        }
+      : {
+          initial: { opacity: 0, y: offset },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount }
+        }
 
   return (
     <motion.section
       id="skills"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      {...reveal(20, 0.2)}
       transition={{ duration: 0.85, ease: 'easeOut' }}
       className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
@@ -68,9 +79,7 @@ const Skills: React.FC<SkillsProps> = () => {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          {...reveal(20)}
           className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Compétences</p>
@@ -82,9 +91,7 @@ const Skills: React.FC<SkillsProps> = () => {
 
         <div className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             className="rounded-[32px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
             <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -125,9 +132,7 @@ const Skills: React.FC<SkillsProps> = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             className="space-y-6"
           >
             {['Frontend', 'Backend', 'Outils'].map((category, idx) => {
@@ -141,9 +146,7 @@ const Skills: React.FC<SkillsProps> = () => {
               return (
                 <motion.div
                   key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  {...reveal(20)}
                   whileHover={{ y: -4, scale: 1.01 }}
                   transition={{ duration: 0.6, type: 'spring', stiffness: 180, damping: 24 }}
                   className="rounded-[32px] border border-white/10 bg-slate-900/80 p-6 shadow-[0_24px_80px_-40px_rgba(15,23,42,0.8)]"

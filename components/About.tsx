@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Code2, Palette, Zap, Users, Mail, Phone, MapPin, Calendar, Award, Link, Briefcase, Building, Clock, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
+import { useIsSmallScreen } from '@/components/useIsSmallScreen'
 
 type AboutProps = {}
 
@@ -15,6 +16,19 @@ type Experience = {
 }
 
 const About = ({}: AboutProps) => {
+  const isSmallScreen = useIsSmallScreen()
+  const reveal = (offset = 20, amount = 0.2) =>
+    isSmallScreen
+      ? {
+          initial: { opacity: 0, y: offset },
+          animate: { opacity: 1, y: 0 }
+        }
+      : {
+          initial: { opacity: 0, y: offset },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount }
+        }
+
   const highlights = [
     {
       icon: <Code2 className="w-6 h-6 text-blue-300" />,
@@ -105,8 +119,7 @@ const About = ({}: AboutProps) => {
   return (
     <motion.section
       id="about"
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      {...reveal(0, 0.2)}
       transition={{ duration: 0.85, ease: 'easeOut' }}
       className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
@@ -117,8 +130,7 @@ const About = ({}: AboutProps) => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          {...reveal(20)}
           className="text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">À Propos</p>
@@ -130,16 +142,14 @@ const About = ({}: AboutProps) => {
 
         {/* Fiche Google / Carte de visite digitale */}
         <motion.div
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          {...reveal(20)}
           transition={{ delay: 0.2 }}
           className="mb-20"
         >
           <div className="grid gap-8 lg:grid-cols-[1fr_2fr] items-start">
             {/* Photo principale */}
             <motion.div
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              {...reveal(20)}
               className="flex justify-center"
             >
               <div className="relative flex w-full max-w-[24rem] items-center justify-center">
@@ -165,8 +175,7 @@ const About = ({}: AboutProps) => {
 
             {/* Informations */}
             <motion.div
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              {...reveal(20)}
               className="space-y-6"
             >
               <div className="rounded-[32px] border border-white/10 bg-slate-900/85 p-8 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl">
@@ -309,8 +318,7 @@ const About = ({}: AboutProps) => {
 
         <div className="mt-16 space-y-12">
           <motion.div
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             transition={{ duration: 0.8 }}
             className="rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
           >
@@ -330,8 +338,7 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
           >
@@ -344,8 +351,7 @@ const About = ({}: AboutProps) => {
               {experiences.map((exp, index) => (
                 <motion.div
                   key={`${exp.company}-${exp.position}-${index}`}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  {...reveal(20)}
                   transition={{ delay: index * 0.08, duration: 0.6 }}
                   className="relative"
                 >
@@ -393,8 +399,7 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
           >
@@ -406,8 +411,7 @@ const About = ({}: AboutProps) => {
               {highlights.map((highlight, index) => (
                 <motion.div
                   key={highlight.title}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  {...reveal(20)}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   className="rounded-3xl border border-white/10 bg-slate-950/80 p-5 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.9)]"
                 >
@@ -422,8 +426,7 @@ const About = ({}: AboutProps) => {
           </motion.div>
 
           <motion.div
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative rounded-[32px] border border-white/10 bg-slate-900/85 p-10 shadow-[0_40px_120px_-55px_rgba(15,23,42,0.8)] backdrop-blur-xl"
           >

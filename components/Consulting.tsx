@@ -2,14 +2,26 @@
 
 import { motion } from 'framer-motion'
 import { Lightbulb, ShieldCheck, BookOpen, ArrowRight } from 'lucide-react'
+import { useIsSmallScreen } from '@/components/useIsSmallScreen'
 
 const Consulting = () => {
+  const isSmallScreen = useIsSmallScreen()
+  const reveal = (offset = 20, amount = 0.2) =>
+    isSmallScreen
+      ? {
+          initial: { opacity: 0, y: offset },
+          animate: { opacity: 1, y: 0 }
+        }
+      : {
+          initial: { opacity: 0, y: offset },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount }
+        }
+
   return (
     <motion.section
       id="consulting"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      {...reveal(20, 0.2)}
       transition={{ duration: 0.85, ease: 'easeOut' }}
       className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >

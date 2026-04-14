@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, MessageCircle, Link, Code } from 'lucide-react'
+import { useIsSmallScreen } from '@/components/useIsSmallScreen'
 
 type ContactProps = {}
 
@@ -10,6 +11,18 @@ const Contact = ({}: ContactProps) => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState('')
   const contactEmail = 'toumanychristophediarra@gmail.com'
+  const isSmallScreen = useIsSmallScreen()
+  const reveal = (offset = 20, amount = 0.2) =>
+    isSmallScreen
+      ? {
+          initial: { opacity: 0, y: offset },
+          animate: { opacity: 1, y: 0 }
+        }
+      : {
+          initial: { opacity: 0, y: offset },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount }
+        }
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -49,9 +62,7 @@ const Contact = ({}: ContactProps) => {
   return (
     <motion.section
       id="contact"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      {...reveal(20, 0.2)}
       transition={{ duration: 0.85, ease: 'easeOut' }}
       className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
@@ -62,9 +73,7 @@ const Contact = ({}: ContactProps) => {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          {...reveal(20)}
           className="hidden md:block text-center mb-10 md:mb-16"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Contact</p>
@@ -76,18 +85,14 @@ const Contact = ({}: ContactProps) => {
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             className="min-w-0 rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
             <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Restons en contact</p>
             <h3 className="text-3xl font-semibold text-white mb-6">Je suis là pour vos projets web et mobile.</h3>
             <div className="space-y-6 text-slate-300">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                {...reveal(20)}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 20 }}
                 className="flex items-start gap-4 rounded-3xl border border-white/10 bg-slate-950/80 p-5"
@@ -105,9 +110,7 @@ const Contact = ({}: ContactProps) => {
                 Envoyer un email
               </a>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                {...reveal(20)}
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.6, type: 'spring', stiffness: 200, damping: 20 }}
                 className="flex items-start gap-4 rounded-3xl border border-white/10 bg-slate-950/80 p-5"
@@ -146,9 +149,7 @@ const Contact = ({}: ContactProps) => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            {...reveal(20)}
             className="min-w-0 rounded-[36px] border border-white/10 bg-slate-900/80 p-10 shadow-[0_30px_90px_-60px_rgba(15,23,42,0.9)]"
           >
             <form className="space-y-6" onSubmit={handleSubmit}>

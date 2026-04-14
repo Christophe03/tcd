@@ -14,6 +14,7 @@ import {
   Scissors
 } from 'lucide-react'
 import { projects } from '@/data'
+import { useIsSmallScreen } from '@/components/useIsSmallScreen'
 
 const projectIcons: Record<string, ReactNode> = {
   'Mes Factures': <Smartphone className="w-5 h-5 text-purple-300" />,
@@ -28,12 +29,23 @@ const projectIcons: Record<string, ReactNode> = {
 interface ProjectsProps {}
 
 const Projects: React.FC<ProjectsProps> = () => {
+  const isSmallScreen = useIsSmallScreen()
+  const reveal = (offset = 24, amount = 0.2) =>
+    isSmallScreen
+      ? {
+          initial: { opacity: 0, y: offset },
+          animate: { opacity: 1, y: 0 }
+        }
+      : {
+          initial: { opacity: 0, y: offset },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount }
+        }
+
   return (
     <motion.section
       id="projects"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      {...reveal(24, 0.2)}
       transition={{ duration: 0.9, ease: 'easeOut' }}
       className="relative py-12 sm:py-16 md:py-24 bg-slate-950 text-white overflow-hidden"
     >
@@ -43,9 +55,7 @@ const Projects: React.FC<ProjectsProps> = () => {
       <div className="absolute right-0 bottom-0 h-72 w-72 rounded-full bg-purple-500/10 blur-3xl"></div>
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          {...reveal(24)}
           className="text-center mb-10 md:mb-14"
         >
           <p className="text-sm uppercase tracking-[0.35em] text-blue-400/80 mb-4">Projets</p>
@@ -61,9 +71,7 @@ const Projects: React.FC<ProjectsProps> = () => {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              {...reveal(24)}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ delay: index * 0.1, duration: 0.6, type: 'spring', stiffness: 180, damping: 24 }}
               className="group relative overflow-hidden rounded-[30px] border border-slate-800/70 bg-slate-900/90 shadow-[0_30px_90px_-40px_rgba(15,23,42,0.85)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-500/40 hover:shadow-[0_35px_120px_-45px_rgba(59,130,246,0.35)]"
