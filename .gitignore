@@ -7,3 +7,4 @@ functions/node_modules
 out/
 .npm-cache/
 *.tsbuildinfo
+.firebase/
