@@ -8,6 +8,7 @@ import { DoorOverlay } from './DoorOverlay'
 import { Loader } from './Loader'
 import { TopBar } from './TopBar'
 import { TreeNav } from './TreeNav'
+import { WhatsappButton } from './WhatsappButton'
 
 /** Scène WebGL chargée à la demande, jamais côté serveur. */
 const Experience3D = dynamic(() => import('./three/Experience3D'), { ssr: false })
@@ -131,9 +132,19 @@ export function Shell({ children }: { children: ReactNode }) {
 
       const onScroll = () => surDefilement()
       window.addEventListener('scroll', onScroll, { passive: true })
-      const ro = new ResizeObserver(() => {
-        mesurer()
-        ScrollTrigger.refresh()
+      // Re-mesure après redimensionnement réel, avec anti-rebond (évite les reflows en cascade).
+      let derniere = { w: 0, h: 0 }
+      let minuterie = 0
+      const ro = new ResizeObserver(([entree]) => {
+        const r = entree?.contentRect
+        if (!r || (Math.abs(r.width - derniere.w) < 1 && Math.abs(r.height - derniere.h) < 1))
+          return
+        derniere = { w: r.width, h: r.height }
+        window.clearTimeout(minuterie)
+        minuterie = window.setTimeout(() => {
+          ScrollTrigger.refresh()
+          mesurer()
+        }, 150)
       })
       ro.observe(document.body)
       document.fonts?.ready.then(() => !disposed && mesurer())
@@ -163,6 +174,7 @@ export function Shell({ children }: { children: ReactNode }) {
       cleanup = () => {
         window.removeEventListener('scroll', onScroll)
         ro.disconnect()
+        window.clearTimeout(minuterie)
         ScrollTrigger.getAll().forEach((t) => t.kill())
         if (tick) gsap.ticker.remove(tick)
         lenis?.destroy()
@@ -228,6 +240,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </main>
       <ClassicView />
       <Loader />
+      <WhatsappButton />
       <DoorOverlay />
     </>
   )

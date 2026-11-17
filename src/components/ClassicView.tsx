@@ -48,7 +48,7 @@ function Avis(props: {
   return (
     <div
       role="status"
-      className="panel text-sable fixed bottom-20 left-1/2 z-40 flex w-[min(520px,calc(100vw-2rem))] -translate-x-1/2 items-center gap-3 p-3 pl-5 text-sm sm:bottom-4"
+      className="panel text-sable fixed bottom-36 left-1/2 z-40 flex w-[min(520px,calc(100vw-2rem))] -translate-x-1/2 items-center gap-3 p-3 pl-5 text-sm sm:bottom-4"
     >
       <p className="flex-1">{props.texte}</p>
       <button type="button" onClick={props.onAction} className="btn btn-or !min-h-10 !px-3 text-xs">

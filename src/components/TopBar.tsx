@@ -19,7 +19,7 @@ export function TopBar() {
       <a
         href="#seuil"
         className="panel font-display text-creme flex h-11 items-center gap-2 !rounded-full px-4 text-lg font-semibold"
-        aria-label="Toumany dit Christophe Diarra — retour en haut"
+        aria-label="TCD Le Baobab — Toumany dit Christophe Diarra, retour en haut"
       >
         <span className="text-or">TCD</span>
         <span className="text-sable/80 hidden text-sm font-normal md:inline">Le Baobab</span>

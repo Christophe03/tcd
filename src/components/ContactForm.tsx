@@ -12,8 +12,16 @@ import { WhatsappIcon } from './icons'
 export function ContactForm() {
   const uid = useId()
   const [erreur, setErreur] = useState<string | null>(null)
+  const [confirmation, setConfirmation] = useState<string | null>(null)
+
+  /** Vide le formulaire après chaque envoi (e-mail ou WhatsApp). */
+  const vider = (form: HTMLFormElement, texte: string) => {
+    form.reset()
+    setConfirmation(texte)
+  }
 
   const lire = (form: HTMLFormElement) => {
+    setConfirmation(null)
     const data = new FormData(form)
     const nom = String(data.get('nom') ?? '').trim()
     const email = String(data.get('email') ?? '').trim()
@@ -33,6 +41,7 @@ export function ContactForm() {
     const sujet = encodeURIComponent(`Contact portfolio — ${v.nom}`)
     const corps = encodeURIComponent(`${v.message}\n\n${v.nom}${v.email ? ` · ${v.email}` : ''}`)
     window.location.href = `mailto:${EMAIL}?subject=${sujet}&body=${corps}`
+    vider(e.currentTarget, 'Votre messagerie s’ouvre avec le message prêt à envoyer. Merci !')
   }
 
   const envoyerWhatsapp = (form: HTMLFormElement | null) => {
@@ -41,6 +50,7 @@ export function ContactForm() {
     if (!v) return
     const texte = encodeURIComponent(`Bonjour Christophe, je suis ${v.nom}. ${v.message}`)
     window.open(`${WHATSAPP_URL}?text=${texte}`, '_blank', 'noopener')
+    vider(form, 'WhatsApp s’ouvre avec votre message prêt à envoyer. Merci !')
   }
 
   const champ =
@@ -84,6 +94,13 @@ export function ContactForm() {
           {erreur}
         </p>
       ) : null}
+      <p
+        role="status"
+        aria-live="polite"
+        className="text-sauge-fonce text-sm font-semibold empty:hidden"
+      >
+        {confirmation}
+      </p>
       <div className="flex flex-wrap gap-2.5">
         <button type="submit" className="btn btn-encre">
           <Send className="h-4 w-4" aria-hidden="true" />
