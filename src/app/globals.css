@@ -1,0 +1,294 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/* Palette Sahel : nuit de terre → aube dorée                          */
+/* ------------------------------------------------------------------ */
+/* Variante « classic: » : styles propres à la vue classique (2D). */
+@custom-variant classic (html[data-view='classic'] &);
+
+@theme {
+  --color-nuit: #120c08;
+  --color-terre: #22160e;
+  --color-brun: #3d2717;
+  --color-ecorce: #5c3d28;
+  --color-sienne: #a4552c;
+  --color-ocre: #cf8a3e;
+  --color-or: #e7b75a;
+  --color-or-clair: #f3d48f;
+  --color-sauge: #9caf83;
+  --color-sauge-fonce: #4e5d3b;
+  --color-creme: #f6eddc;
+  --color-sable: #e9d8b9;
+  --color-encre: #23170f;
+  --color-encre-douce: #5a4434;
+
+  --font-display: var(--font-fraunces), 'Georgia', serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --ease-sahel: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  color-scheme: dark;
+  --bg: var(--color-nuit);
+  --bogolan-zigzag: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 10 L6 2 L12 10 L18 2 L24 10' fill='none' stroke='%23cf8a3e' stroke-width='1.6'/%3E%3C/svg%3E");
+  --bogolan-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'%3E%3Ccircle cx='4' cy='4' r='1.4' fill='%23e7b75a'/%3E%3Crect x='10' y='3' width='4' height='2' fill='%23e7b75a'/%3E%3C/svg%3E");
+}
+
+html {
+  background: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--color-creme);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Pendant l'intro : la page ne défile pas. */
+html[data-intro='show'] body {
+  overflow: hidden;
+}
+/* Le contenu reste dans le DOM (SEO, lecteurs d'écran après l'intro) mais n'est pas peint derrière la porte. */
+main {
+  transition: opacity 0.9s ease;
+}
+html[data-intro='show'] main {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* La porte n'est visible que si le script d'amorçage l'a demandé (pas pour les robots ni sans JS). */
+.door-overlay {
+  display: none;
+}
+html[data-intro='show'] .door-overlay {
+  display: flex;
+}
+
+/* Focus visible partout */
+:focus-visible {
+  outline: 2px solid var(--color-or);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--color-or);
+  color: var(--color-encre);
+}
+
+/* ------------------------------------------------------------------ */
+/* Composants                                                         */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Bordure bogolan : zigzag ocre sur une ligne */
+  .bogolan-rule {
+    height: 12px;
+    background-image: var(--bogolan-zigzag);
+    background-repeat: repeat-x;
+    background-size: 24px 12px;
+    opacity: 0.7;
+  }
+  .bogolan-dots {
+    height: 8px;
+    background-image: var(--bogolan-dots);
+    background-repeat: repeat-x;
+    background-size: 16px 8px;
+    opacity: 0.55;
+  }
+
+  /* Panneau « écorce » sombre — lisible au-dessus de la scène 3D (contraste AA). */
+  .panel {
+    background: color-mix(in oklab, var(--color-nuit) 84%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-or) 22%, transparent);
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 80px -40px rgb(0 0 0 / 0.8);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  }
+
+  /* Panneau « papier » clair pour le ciel. */
+  .panel-light {
+    background: color-mix(in oklab, var(--color-creme) 92%, transparent);
+    color: var(--color-encre);
+    border: 1px solid color-mix(in oklab, var(--color-sienne) 25%, transparent);
+    border-radius: 1.25rem;
+    box-shadow: 0 30px 80px -40px rgb(60 30 10 / 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-or);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    padding: 0.625rem 1.15rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition:
+      background-color 0.25s var(--ease-sahel),
+      color 0.25s var(--ease-sahel),
+      border-color 0.25s var(--ease-sahel),
+      transform 0.25s var(--ease-sahel);
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-or {
+    background: var(--color-or);
+    color: var(--color-encre);
+  }
+  .btn-or:hover {
+    background: var(--color-or-clair);
+  }
+  .btn-ghost {
+    border: 1px solid color-mix(in oklab, var(--color-creme) 30%, transparent);
+    color: var(--color-creme);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-or);
+    color: var(--color-or-clair);
+  }
+  .btn-encre {
+    background: var(--color-encre);
+    color: var(--color-creme);
+  }
+  .btn-encre:hover {
+    background: var(--color-brun);
+  }
+  .btn-contour-encre {
+    border: 1px solid color-mix(in oklab, var(--color-encre) 35%, transparent);
+    color: var(--color-encre);
+  }
+  .btn-contour-encre:hover {
+    border-color: var(--color-sienne);
+    color: var(--color-sienne);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: color-mix(in oklab, var(--color-or) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-or) 28%, transparent);
+    color: var(--color-sable);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Mise en page : immersive (scène 3D derrière) / classique (2D)      */
+/* ------------------------------------------------------------------ */
+
+/* En vue immersive, les sections laissent passer le pointeur vers la scène 3D,
+   sauf sur les panneaux et contrôles. */
+html[data-view='immersive'] .story-section {
+  pointer-events: none;
+}
+html[data-view='immersive']
+  .story-section
+  :is(.panel, .panel-light, a, button, input, textarea, [data-link]) {
+  pointer-events: auto;
+}
+
+.story-section {
+  position: relative;
+  scroll-margin-top: 4rem;
+}
+
+/* Vue classique : fonds pleins qui s'éclaircissent de la terre vers l'aube. */
+html[data-view='classic'] #seuil {
+  background: linear-gradient(180deg, #1a110b, #120c08);
+}
+html[data-view='classic'] #racines {
+  background: #120c08;
+}
+html[data-view='classic'] #tronc {
+  background: linear-gradient(180deg, #120c08, #22160e);
+}
+html[data-view='classic'] #branches {
+  background: linear-gradient(180deg, #22160e, #3a2716);
+}
+html[data-view='classic'] #feuilles {
+  background: linear-gradient(180deg, #3a2716, #6e4c2b);
+}
+html[data-view='classic'] #contact {
+  background: linear-gradient(180deg, #6e4c2b, #e8c58a 55%, #f3dcaa);
+}
+html[data-view='classic'] .story-section {
+  min-height: auto !important;
+}
+/* Laisse la place à l'arbre-index à droite. */
+@media (min-width: 1024px) {
+  html[data-view='classic'] .story-section {
+    padding-right: 11rem;
+  }
+}
+html[data-view='classic'] .immersive-only {
+  display: none !important;
+}
+html[data-view='immersive'] .classic-only {
+  display: none !important;
+}
+
+/* Scène 3D fixe derrière le contenu */
+.scene-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Dialog natif pour les projets */
+dialog.projet-modal::backdrop {
+  background: rgb(10 6 4 / 0.72);
+  backdrop-filter: blur(4px);
+}
+dialog.projet-modal[open] {
+  animation: modal-in 0.35s var(--ease-sahel);
+}
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+/* Respiration de la lumière (fallback DOM de la porte) */
+@keyframes respire {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

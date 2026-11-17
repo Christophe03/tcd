@@ -2,3 +2,9 @@ node_modules
 .env.local
 .env*.local
 functions/node_modules
+# build outputs & caches
+.next/
+out/
+.npm-cache/
+*.tsbuildinfo
+.firebase/
