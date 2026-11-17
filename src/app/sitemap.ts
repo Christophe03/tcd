@@ -1,16 +1,21 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/data/profil'
 
 export const dynamic = 'force-static'
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://toumanyditchristophe.web.app'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: siteUrl,
+      url: `${SITE_URL}/`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
+    },
+    {
+      url: `${SITE_URL}/documents/Toumany_dit_Christophe_Diarra.pdf`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
   ]
 }
