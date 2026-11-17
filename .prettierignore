@@ -1,0 +1,11 @@
+.next
+out
+.npm-cache
+functions
+.agents
+.claude
+.trae
+.windsurf
+public
+package-lock.json
+skills-lock.json
